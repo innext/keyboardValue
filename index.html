@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap" rel="stylesheet">
+    <style>
+
+body {
+    font-size: 50px;
+    background-color: #ffffff;
+    padding: 5px, 5px;
+    font-family: roboto;
+    justify-content: center890;
+}
+
+#message {
+    font-size: 2em;
+}
+
+.keyValue {
+    border: .10rem solid #000000;
+    border-radius: .8rem;
+    width: 10rem;
+    height: 10rem;
+    color: white;
+    background: #000000;
+    margin: auto;
+}
+
+#keyPress {
+    width: 2rem;
+    height: 3rem;
+    margin-bottom: 2rem;
+    margin-left: .7rem;
+    text-align: right;
+}
+
+#keyCode {
+    width: 4rem;
+    height: 5rem;
+    margin-left: 5rem;
+    margin-right: .5rem;
+    text-align: left;
+}
+
+.mode {
+    border: #000000 solid .2rem;
+    border-radius: .5rem;
+    background: #000000;
+    width: 4rem;
+    height: 4rem;
+    font-size: 1rem;
+    color: #ffffff;
+    margin-inline-start: auto;
+    align-content: center;
+    margin-top: 5rem;
+}
+
+.switch {
+    display: inline;
+    padding-left: .6rem;
+}
+
+.dark,
+
+body.dark .mode {
+    color: #000000;
+    background: #ffffff;
+}
+
+body.dark .keyValue {
+    color: #000000;
+    background: #ffffff;
+}
+
+body.dark {
+    color: #ffffff;
+    background: #000000;
+}
+    </style>
+    <title>Keyboard Value</title>
+</head>
+<body>
+
+    <div id="message">
+        Kindly press a key on <br> your Keyboard
+    </div>
+
+    <div id="input-box">
+        <input type="hidden" id="input-box" autofocus=true>
+    </div>
+
+    <div class="keyValue" id="keyValue">
+        <div id="keyPress">
+            <!-- the key that was pressed -->
+        </div>
+
+        <div id="keyCode">
+            <!-- the value of the key that was pressed -->
+        </div>
+    </div>
+
+    <div class="mode">
+        <span class="switch">DARK</span>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script>
+        window.addEventListener("load", () => {
+            let hidKeyValue = document.getElementById("keyValue")
+            hidKeyValue.style.display = "none"
+        })
+
+        window.addEventListener("keypress", () => {
+            let hidKeyValue = document.getElementById("keyValue")
+            hidKeyValue.style.display = "block"
+        })
+
+        window.addEventListener("keydown", (e) => {
+            const keyCode = document.querySelector(`#keyCode`)
+            const keyPress = document.querySelector(`#keyPress`)
+            
+            keyCode.innerHTML = e.keyCode,
+            keyPress.innerHTML = e.key
+        })
+
+        $( ".mode" ).on("click", function() {
+            if( $( "body" ).hasClass( "dark" )) {
+                $( "body" ).removeClass( "dark" );
+                $( ".mode" ).text( "DARK" );
+            } else {
+                $( "body" ).addClass( "dark" );
+                $( ".mode" ).text( "LIGHT" );
+            }
+        });
+
+        $("body").on("keyup", function(){
+            $("#message").text("Press another key")
+        })
+    </script>
+</body>
+</html>
